@@ -5,6 +5,7 @@ const pizzas = [
         nombre: 'Comun',
         ingredientes: ['Salsa de tomate', 'Muzza', 'Oregano'],
         precio: 200,
+        imagen: 1,
 
 
 
@@ -13,8 +14,10 @@ const pizzas = [
     {
         id: 2,
         nombre: 'Especial',
-        ingredientes: ['Salsa de tomate', 'Muzza', 'Oregano, Jamon, Huevo, Morron'],
+        ingredientes: ['Salsa de tomate', 'Muzza', 'Oregano', 'Jamon', 'Huevo', 'Morron'],
         precio: 350,
+        imagen: 2,
+
 
 
     },
@@ -23,6 +26,7 @@ const pizzas = [
         nombre: 'Napolitana',
         ingredientes: ['Salsa de tomate', 'Muzza', 'Oregano', 'Tomate en Rodajas', 'Ajo'],
         precio: 500,
+        imagen: 3,
 
 
     },
@@ -31,6 +35,7 @@ const pizzas = [
         nombre: 'Fugazza',
         ingredientes: ['Cebolla blanca', 'Cebolla morada', 'Muzza', 'Oregano', 'Oliva'],
         precio: 600,
+        imagen: 4,
 
 
     },
@@ -39,6 +44,7 @@ const pizzas = [
         nombre: '4 Quesos',
         ingredientes: ['Salsa de tomate', 'Muzza', 'Provolone', 'Roquefort', 'Parmesano', 'Oregano', 'Oliva'],
         precio: 700,
+        imagen: 5,
 
 
     },
@@ -47,7 +53,7 @@ const pizzas = [
         nombre: 'Panceta y Cheddar',
         ingredientes: ['Salsa de tomate', 'Cheedar', 'Panceta', 'Oregano', 'Ketchupt', 'Barbacoa'],
         precio: 800,
-
+        imagen: 6,
 
     },
 ]

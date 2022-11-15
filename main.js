@@ -1,47 +1,85 @@
 const FORM = document.getElementById('formulario');
 const INPUT = document.getElementById('input1');
 const SEARCH = document.getElementById('button');
-const CONTAINER = document.getElementById('container__card');
+const CONTAINER = document.getElementById('container__cardID')
 
 /*  FUNCIONES UTILES */
 
 const isEmpty = (idIngresado) => !idIngresado ? true : false;
 
-const showError = (message) => console.log(message);
+const showError = (message) => {
+    CONTAINER.innerHTML = `
+    <h2 class="errorNotFound">${message}</h2>
+    
+    `
+};
 
 const notExist = (idIngresado) => {
 
 
-    return pizzas.some((pizza) => {
-        idIngresado === pizza.id
-    });
+    return !pizzas.some(e => e.id == idIngresado)
+
+};
+
+const findPizza = (idIngresado) => {
+
+    return pizzas.find(pizza => pizza.id == idIngresado)
+
 
 }
+
+const renderPizza = (pizza) => {
+    if (pizza.length === 0) {
+        return
+    } else {
+        CONTAINER.innerHTML = `
+    <div class="card">
+    <h2 class="card__h2">Pizza ${pizza.nombre}</h2>
+    <img class="card__img" src="IMG/${pizza.imagen}.jpg"" />
+    <h3 class="card__ingredientes">${pizza.ingredientes.join(' - ')}</h3>
+    <h3 class="card__precio">Precio</h3>
+    <h3 class="card__precio-number">$${pizza.precio}</h3>
+  </div>`
+    }
+}
+
 
 
 /*  local storage */
 
-const pizza = (JSON.parse(localStorage.getItem('pizzas'))) || []
+let onPizza = (JSON.parse(localStorage.getItem('pizza'))) || []
 
-const savedPizzaLocalStorage = (pizzaRenderizada) => localStorage.setItem('pizza', JSON.stringify(pizzaRenderizada))
+const PizzaLocalStorage = (onPizza) => localStorage.setItem('pizza', JSON.stringify(onPizza))
+
+const resetLS = () => onPizza = localStorage.setItem('pizza', JSON.stringify([]))
 
 /* Validacion */
 
-const funcion = (e) => {
+const validId = (e) => {
     e.preventDefault();
 
     idIngresado = Number(INPUT.value);
 
+
     if (isEmpty(idIngresado)) {
-        console.log(notExist)
-        return showError('ingresa un numerito')
+        resetLS()
+        return showError('Ingrese un numero')
     }
 
     if (notExist(idIngresado)) {
+        resetLS();
+        FORM.reset();
         return showError('El ID ingresado no corresponde con ninguna de nuestras Pizzas')
+
+    } else {
+
+
+        renderPizza(findPizza(idIngresado))
+
+        PizzaLocalStorage(findPizza(idIngresado))
+
     }
-
-
+    FORM.reset();
 }
 
 
@@ -50,12 +88,11 @@ const funcion = (e) => {
 
 
 const init = () => {
-
-    FORM.addEventListener('submit', funcion);
+    PizzaLocalStorage(onPizza)
+    renderPizza(onPizza)
+    FORM.addEventListener('submit', validId);
 
 }
 init();
-
-
 
 
